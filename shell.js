@@ -89,6 +89,10 @@ exports.popd = common.wrap("popd", _popd);
 var _ln = require('./src/ln');
 exports.ln = common.wrap('ln', _ln);
 
+//@include ./src/tail
+var _tail = require('./src/tail');
+exports.tail = common.wrap('tail', _tail);
+
 //@
 //@ ### exit(code)
 //@ Exits the current process with the given exit code.
