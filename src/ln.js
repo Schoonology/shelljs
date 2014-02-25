@@ -1,7 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var common = require('./common');
-var os = require('os');
+var test = require('./test');
 
 //@
 //@ ### ln(options, source, dest)
@@ -36,7 +36,7 @@ function _ln(options, source, dest) {
     common.error('Source file does not exist', true);
   }
 
-  if (fs.existsSync(dest)) {
+  if (test('-L', dest) || fs.existsSync(dest)) {
     if (!options.force) {
       common.error('Destination file exists', true);
     }
@@ -45,9 +45,9 @@ function _ln(options, source, dest) {
   }
 
   if (options.symlink) {
-    fs.symlinkSync(source, dest, os.platform() === "win32" ? "junction" : null);
+    fs.symlinkSync(source, dest);
   } else {
-    fs.linkSync(source, dest, os.platform() === "win32" ? "junction" : null);
+    fs.linkSync(source, dest);
   }
 }
 module.exports = _ln;
