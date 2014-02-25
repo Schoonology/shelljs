@@ -45,7 +45,7 @@ function _ln(options, source, dest) {
   }
 
   if (options.symlink) {
-    fs.symlinkSync(source, dest);
+    fs.symlinkSync(path.relative(path.dirname(dest), source), dest);
   } else {
     fs.linkSync(source, dest);
   }
